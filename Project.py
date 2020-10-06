@@ -24,7 +24,7 @@ for rule in delta:
 
 print("States QN= ",states)
 print("Language ",language)
-
+statessize= len(states)
 # substring = lines[1:len(lines)-1]
 # print(substring)
 # contcomas=0
@@ -46,12 +46,55 @@ print("Language ",language)
 #     print(transicion[con])
 #     print("\n")
 #     con+=1
+combinationList=[]
 print("QD= {",end=" ")
 for i in range(0,len(states)+1):
     comb = combinations(states, i) 
     for j in list(comb):
+       combinationList.append(j)
        if i==len(states):  
         print(j, end=" ")
        else:
            print(j, end=",")
 print("}\n")
+
+#Transition table
+tranList=[]
+empty0 = tuple(('Ø','0',"Ø"))
+empty1 = tuple(('Ø','1',"Ø"))
+tranList.append(empty0)
+tranList.append(empty1)
+#for sta in states:
+#    aux=sta
+#    c= ""
+#    for len in language:
+#     aux2=len
+#    for elem in delta:
+  #        if(elem[0]==aux2 and elem[2]==aux) :
+  #           c= c + elem[4] + " "
+ #     if(c==""):
+  #        c="Ø"
+  #    table = tuple((aux,aux2,c))
+  #    tranList.append(table)
+ #     c=""
+#Transition for combinations
+for combin in range(1,pow(2,statessize)):
+    c=""
+    x=combinationList[combin]
+    for len in language:
+      aux2=len
+      for var in x:
+         for elem in delta:
+             if(elem[0]==aux2 and elem[2]==var) :
+                c= c + elem[4] + " "
+
+     
+      if(c==""):
+        c="Ø"
+      table = tuple((x,aux2,c))
+      tranList.append(table)
+      c=""   
+for transitions in tranList:
+    print(transitions)
+
+ 
