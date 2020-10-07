@@ -1,4 +1,5 @@
 from itertools import combinations
+from collections import OrderedDict
 import re
 file=open('automata.txt',"r")
 lines = file.readline()
@@ -58,8 +59,10 @@ for i in range(0,len(states)+1):
            print(j, end=",")
 print("}\n")
 
+
 #Transition table
 tranList=[]
+print("DFA")
 empty0 = tuple(('Ø','0',"Ø"))
 empty1 = tuple(('Ø','1',"Ø"))
 tranList.append(empty0)
@@ -87,13 +90,13 @@ for combin in range(1,pow(2,statessize)):
          for elem in delta:
              if(elem[0]==aux2 and elem[2]==var) :
                 c= c + elem[4] + " "
-
-     
+            
       if(c==""):
         c="Ø"
-      table = tuple((x,aux2,c))
+      table = tuple((x,aux2,("".join(OrderedDict.fromkeys(c)))))
       tranList.append(table)
       c=""   
+      
 for transitions in tranList:
     print(transitions)
 
