@@ -78,7 +78,7 @@ for combin in range(1,pow(2,statessize)):
       tranList.append(table)
       c=""  
 cont=len(tranList)
-out=open(theFile,'w')  
+out=open('DFA.txt','w')  
 out.write('{ ')
 cont=0    
 for transitions in tranList:
