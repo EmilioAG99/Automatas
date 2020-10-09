@@ -17,7 +17,7 @@ language=[]
 states=[]
 states.append(aux)
 language.append(aux2)
-aux=delta[0][4]
+print(aux)
 for rule in delta:
     if (rule[4]!=aux and rule[4] not in states):
         aux=rule[4]
