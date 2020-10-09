@@ -96,8 +96,12 @@ for combin in range(1,pow(2,statessize)):
       table = tuple((x,aux2,("".join(OrderedDict.fromkeys(c)))))
       tranList.append(table)
       c=""   
-      
+out=open('DFA.txt','w')  
+out.write('{')    
 for transitions in tranList:
-    print(transitions)
-
+    document=str(transitions)
+    print(document)
+    out.write(document)
+out.write('}')
+out.close()
  
