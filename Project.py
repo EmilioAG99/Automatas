@@ -1,7 +1,8 @@
 from itertools import combinations
 from collections import OrderedDict
 import re
-file=open('automata.txt',"r")
+theFile=input("Please type the name of your NFA .txt file\n")
+file=open(theFile,"r")
 lines = file.readline()
 file.close()
 regex=r"\(([a-z0-9,]*)\)"
@@ -51,10 +52,12 @@ print("}\n")
 
 
 #Transition table
+
+
 tranList=[]
 print("DFA")
-empty0 = tuple(('Ø','0',"Ø"))
-empty1 = tuple(('Ø','1',"Ø"))
+empty0 = tuple(('0','Ø',"Ø"))
+empty1 = tuple(('1','Ø',"Ø"))
 tranList.append(empty0)
 tranList.append(empty1)
 
@@ -62,8 +65,8 @@ tranList.append(empty1)
 for combin in range(1,pow(2,statessize)):
     c=""
     x=combinationList[combin]
-    for len in language:
-      aux2=len
+    for lan in language:
+      aux2=lan
       for var in x:
          for elem in delta:
              if(elem[0]==aux2 and elem[2]==var) :
@@ -71,11 +74,12 @@ for combin in range(1,pow(2,statessize)):
             
       if(c==""):
         c="Ø"
-      table = tuple((x,aux2,("".join(OrderedDict.fromkeys(c)))))
+      table = tuple((aux2,x,"("+(",".join(OrderedDict.fromkeys(c))+")")))
       tranList.append(table)
-      c=""   
-out=open('DFA.txt','w')  
-out.write('{')
+      c=""  
+cont=len(tranList)
+out=open(theFile,'w')  
+out.write('{ ')
 cont=0    
 for transitions in tranList:
     document=str(transitions)
@@ -84,7 +88,8 @@ for transitions in tranList:
     print(document)
     out.write(document)
     cont+=1
-    out.write(",")
-out.write('}')
+    if(cont!=len(tranList)):
+        out.write(" , ")
+out.write(' }')
 out.close()
  
